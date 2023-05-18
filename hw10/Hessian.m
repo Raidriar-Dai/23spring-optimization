@@ -1,0 +1,9 @@
+function H=Hessian(m,n,A,b,x)
+e = ones(m,1);
+p = 1 ./ (1+exp(-b.*(A*x)));
+I = eye(n,n);
+D_P = spdiags(p,[0],m,m);
+% D_P = diag(p,0);
+D_e_p = spdiags(e-p,[0],m,m);
+% D_e_p = diag(e-p,0);
+H= 1/m * A'*(D_P * D_e_p)*A + 1/(50*m)*I;
